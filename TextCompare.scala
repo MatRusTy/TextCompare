@@ -29,7 +29,7 @@ object textCompare{
         val t2vector: List[Int] = wordSet.map(s => t2.count(p => s.equals(p)))
         println(s"Formatted text 1: ${t1.mkString(" ")}")
         println(s"Formatted text 2: ${t2.mkString(" ")}")
-        println(s"Set of words: ${wordSet.mkString(" ")}")
+        println(s"Set of words: ${wordSet.mkString("{",", ", "}")}")
         println(s"Text 1 Vector: ${t1vector.mkString("[",", ","]")}")
         println(s"Text 2 Vector: ${t2vector.mkString("[",", ","]")}")
         val euclideanDistance = d(t1vector, t2vector)
@@ -41,13 +41,13 @@ object textCompare{
     def d(v1: List[Int], v2: List[Int]): Double = {
         if(v1.size != v2.size) throw new Exception("Vectors have different dimensions")
         val pairs = v1.zip(v2)
-        val difSquaredSum: Double = pairs.map({case (p,q) => math.pow(p-q, 2) }).sum
+        val difSquaredSum: Double = pairs.map({case (p,q) => math.pow(p - q, 2)}).sum
         math.sqrt(difSquaredSum)
     }
 
     def c(v1: List[Int], v2: List[Int]): Double = {
         if(v1.size != v2.size) throw new Exception("Vectors have different dimensions")
-        val dotproduct = v1.zip(v2).map({case (p,q) => p*q }).sum
+        val dotproduct = v1.zip(v2).map({case (p,q) => p * q}).sum
         val v1Length = math.sqrt(v1.map(p => math.pow(p, 2)).sum)
         val v2Length = math.sqrt(v2.map(p => math.pow(p, 2)).sum)
         dotproduct / (v1Length * v2Length)
